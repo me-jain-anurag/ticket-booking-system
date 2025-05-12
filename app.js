@@ -2,11 +2,15 @@
 const express = require('express');
 const path = require('path');
 
-// Import database connection
+// Import database and models
 const db = require('./config/database');
+const { syncModels } = require('./models');
 
 // Test database connection
 db.testConnection();
+
+// Sync models with database
+syncModels();
 
 // Create an Express application
 const app = express();
