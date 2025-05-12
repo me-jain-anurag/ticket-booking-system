@@ -5,12 +5,11 @@ const Booking = require('./Booking');
 // (Relationships are already defined in the Booking model)
 
 // Sync all models with the database
-async function syncModels() {
+async function syncModels(options = {}) {
     try {
         // Use { force: true } to drop and recreate tables (CAUTION: deletes all data!)
-        // For development only
-        await Event.sync();
-        await Booking.sync();
+        await Event.sync(options);
+        await Booking.sync(options);
         console.log('Models synchronized with database');
     } catch (error) {
         console.error('Error synchronizing models:', error);

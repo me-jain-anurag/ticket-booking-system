@@ -1,0 +1,45 @@
+<div class="event-details-page">
+    <a href="/events" class="back-link">← Back to Events</a>
+    
+    <h2><%= event.title %></h2>
+    
+    <div class="event-info">
+        <p class="event-date"><strong>Date:</strong> <%= new Date(event.date).toLocaleString() %></p>
+        <p class="event-venue"><strong>Venue:</strong> <%= event.venue %></p>
+        <p class="event-availability"><strong>Available Tickets:</strong> <%= event.availableTickets %></p>
+        <p class="event-price"><strong>Price:</strong> $<%= event.price %></p>
+    </div>
+    
+    <div class="event-description">
+        <h3>Description</h3>
+        <p><%= event.description %></p>
+    </div>
+    
+    <% if(event.availableTickets > 0) { %>
+        <div class="booking-form">
+            <h3>Book Tickets</h3>
+            <form action="/events/<%= event.id %>/book" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="customerName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="customerEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tickets">Number of Tickets</label>
+                    <input type="number" id="tickets" name="ticketsBooked" min="1" max="<%= event.availableTickets %>" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Book Now</button>
+            </form>
+        </div>
+    <% } else { %>
+        <div class="sold-out">
+            <p>Sorry, this event is sold out!</p>
+        </div>
+    <% } %>
+</div>
